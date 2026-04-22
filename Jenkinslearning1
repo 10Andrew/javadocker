@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('mvn installation') {
+            sh 'sh sudo dnf install maven'
+        }
+        stage('create package'){
+            sh 'sh mvn clean package'
+        }
+        stage('release'){
+            archiveArtifacts artifacts: 'archive artifact target/*.jar', followSymlinks: false
+        }
+        
+      
+    }
+}
